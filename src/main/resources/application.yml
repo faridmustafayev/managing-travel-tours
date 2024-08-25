@@ -1,0 +1,12 @@
+server:
+  port: 8181
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/travel_tours
+    username: travel
+    password: travelTours
+  jpa:
+    show-sql: true
+    open-in-view: false
+  liquibase:
+    change-log: classpath:liquibase/changelog-master.yml

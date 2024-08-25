@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create tours_travelers table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: tours_travelers
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: traveler_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information relation between tours and travelers table
+
+        - addForeignKeyConstraint:
+            baseTableName: tours_travelers
+            baseColumnNames: tour_id
+            referencedTableName: tours
+            referencedColumnNames: id
+            constraintName: fk_tours_travelers_tours
+
+        - addForeignKeyConstraint:
+            baseTableName: tours_travelers
+            baseColumnNames: traveler_id
+            referencedTableName: travelers
+            referencedColumnNames: id
+            constraintName: fk_tours_travelers_travelers

@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create tour_detail table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: tour_details
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: tour_details
+            baseColumnNames: id
+            referencedTableName: tours
+            referencedColumnNames: id
+            constraintName: fk_tour_details_tour
+
+        - sql:
+            dbms: postgresql
+            sql: "COMMENT ON TABLE tour_details IS 'Table to store information about tour_details'"

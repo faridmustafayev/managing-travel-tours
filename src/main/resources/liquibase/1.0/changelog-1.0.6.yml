@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create travelers table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: travelers
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about travelers
