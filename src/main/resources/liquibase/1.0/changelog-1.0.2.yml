@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create destination table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: destinations
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: visit_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: destinations
+            baseColumnNames: tour_id
+            referencedTableName: tours
+            referencedColumnNames: id
+            constraintName: fk_destinations_tours
+
+        - sql:
+            dbms: postgresql
+            sql: "COMMENT ON TABLE destinations IS 'Table to store information about destinations'"

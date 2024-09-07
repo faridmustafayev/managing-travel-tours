@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create tours_guides table
+      author: Farid Mustafayev
+      changes:
+        - createTable:
+            tableName: tours_guides
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: guide_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+            remarks: Table to store information about tours_guides
+
+        - addForeignKeyConstraint:
+            baseTableName: tours_guides
+            baseColumnNames: tour_id
+            referencedTableName: tours
+            referencedColumnNames: id
+            constraintName: fk_tours_guides_tours
+
+        - addForeignKeyConstraint:
+            baseTableName: tours_guides
+            baseColumnNames: guide_id
+            referencedTableName: guides
+            referencedColumnNames: id
+            constraintName: fk_tours_guides_guides
+
+        - addUniqueConstraint:
+            tableName: tours_guides
+            columnNames: guide_id, tour_id
+            constraintName: uq_guide_tour
